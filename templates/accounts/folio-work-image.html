@@ -1,0 +1,1 @@
+<a class="folio-work-link" href="{% if work.section == 'art' %}{{ work.link_url }}{% else %}{% url 'article' work.pk %}{% endif %}" aria-label="Read {{ work.title }}"><img src="{{ work.image_url }}" alt="{{ work.title }} — published work" loading="lazy"></a>

@@ -1,0 +1,16 @@
+{% load static %}
+<header class="search__header">
+ <a class="search__brand" href="{% url 'home' %}" aria-label="MindState home"><img src="{% static 'ChatgptImageSep19202611_28_00Pm2.png' %}" alt="MindState"></a>
+ <ul class="search__menu" aria-label="Main menu">
+  <li class="search__nav-item"><a href="{% url 'home' %}#home-articles">Articles <span class="search__count">11</span></a></li>
+  <li class="search__nav-item"><a href="{% url 'art-gallery' %}">Art <span class="search__count">6</span></a></li>
+  <li class="search__nav-item"><a href="{% url 'contribute' %}">Contribute</a></li>
+  <li class="search__nav-item"><a href="{% url 'collaboration-space' %}">Collaborate</a></li>
+  <li class="search__nav-item"><a href="{% url 'about' %}">About us</a></li>
+  <li class="search__nav-item"><a href="{% url 'about' %}#contact-us">Contact us</a></li>
+ </ul>
+ <div class="search__user-actions">
+  <a href="{% url 'search' %}" class="search__header-icon" aria-label="Search"><span class="ms-icon" aria-hidden="true">search</span></a>
+  {% if not user.is_authenticated and not request.session.application_receipt %}<a class="search__read-more-button" href="{% url 'signup' %}"><span class="search__button-text-2">Join the Community</span></a>{% endif %}{% include 'account-menu.html' %}
+ </div>
+</header>

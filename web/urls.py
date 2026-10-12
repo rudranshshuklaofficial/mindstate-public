@@ -1,0 +1,40 @@
+"""
+URL configuration for web project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic import TemplateView
+from alpha.design_system import design_system
+from alpha.views import art_gallery, article, art_post, community_directory, contribute, home, home_articles_more, landing, search
+
+urlpatterns = [
+    path('', include('accounts.urls')),
+    path('', home, name='home'),
+    path('home/articles/', home_articles_more, name='home-articles-more'),
+    path('app/', home, name='home_app'),
+    path('app/article/<int:pk>/', article, name='article'),
+    path('art/', art_gallery, name='art-gallery'),
+    path('app/art/<slug:slug>/', art_post, name='art_post'),
+    path('article/<int:pk>/', article),
+    path('app/search/', search, name='search'),
+    path('search/', search),
+    path('landing/', landing, name='landing'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('contribute/design-system/', design_system, name='design-system'),
+    path('contribute/', contribute, name='contribute'),
+    path('community/members/', community_directory, name='community-directory'),
+    path('admin/', admin.site.urls),
+]

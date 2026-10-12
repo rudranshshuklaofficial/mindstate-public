@@ -1,0 +1,1 @@
+{% extends 'app/base.html' %}{% block title %}{{ title }}{% endblock %}{% block content %}<section class="workspace-panel"><h1>{{ title }}</h1><p>{{ description }}</p><form class="app-form" method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button class="app-button" type="submit">{{ button }}</button></form></section>{% endblock %}

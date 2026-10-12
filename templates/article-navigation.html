@@ -1,0 +1,16 @@
+{% load static %}
+<header class="reading-nav">
+ <a href="{% url 'home' %}" aria-label="MindState home"><img src="{% static 'ChatgptImageSep19202611_28_00Pm2.png' %}" alt="MindState"></a>
+ <nav aria-label="Main navigation">
+  <a href="{% url 'home' %}#home-articles">Articles <span>11</span></a>
+  <a href="{% url 'art-gallery' %}">Art <span>6</span></a>
+  <a href="{% url 'contribute' %}">Contribute</a>
+  <a href="{% url 'collaboration-space' %}">Collaborate</a>
+  <a href="{% url 'about' %}">About us</a>
+  <a href="{% url 'about' %}#contact-us">Contact us</a>
+ </nav>
+ <div class="reading-nav-actions">
+  <a href="{% url 'search' %}" aria-label="Search articles"><span class="ms-icon" aria-hidden="true">search</span></a>
+  {% if not user.is_authenticated and not request.session.application_receipt %}<a class="reading-nav-join" href="{% url 'signup' %}">Join the Community</a>{% endif %}{% include 'account-menu.html' %}
+ </div>
+</header>

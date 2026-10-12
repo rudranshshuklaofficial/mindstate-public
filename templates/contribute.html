@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Read the MindState community and contribution guidelines for writing, art, translation, technology, and caring for one another.">
+ <title>Contribute — MindState</title>
+ <link href="{% static 'site-fonts.css' %}" rel="stylesheet">
+ <link href="{% static 'community-footer.css' %}?v=community-directory-3" rel="stylesheet">
+ <link href="{% static 'article-ui.css' %}?v=reading-7" rel="stylesheet">
+ <link href="{% static 'about.css' %}" rel="stylesheet">
+ <link href="{% static 'contribute.css' %}?v=2" rel="stylesheet">
+ <script src="{% static 'home-ui.js' %}" defer></script>
+ <link rel="icon" type="image/x-icon" href="{% static 'ChatgptImageSep19202611_28_00Pm2.png' %}">
+<link rel="stylesheet" href="{% static 'ui-foundations.css' %}">
+<script src="{% static 'app.js' %}" defer></script><link rel="stylesheet" href="{% static 'app.css' %}?v=actions-3"></head>
+<body class="about-page contribute-page">
+ {% include 'article-navigation.html' %}
+ <main class="contribute-main" id="top">
+  <header class="contribute-intro">
+   <p class="about-eyebrow">MindState</p>
+   <h1>Help shape MindState.</h1><div class="contribute-primary-actions"><a class="app-button app-outline" href="{% url 'design-system' %}">Explore the MindState design system <span class="ms-icon" aria-hidden="true">palette</span></a>
+   <a class="app-button app-outline contribute-download" href="{% static 'documents/MindState_Guidelines.docx' %}" download="MindState_Guidelines.docx">Download the full guide <span>Word document ↓</span></a>
+   <a class="app-button" href="{% url 'collaboration-space' %}">Find a writer or artist <span class="ms-icon" aria-hidden="true">handshake</span></a></div><p class="contribute-lede">How we write, draw, translate, build and look after each other on MindState.</p>
+   <div class="contribute-actions" aria-label="MindState on GitHub">
+    <a href="https://github.com/rudranshshuklaofficial/mindstate" target="_blank" rel="noopener noreferrer">Star on GitHub <span aria-hidden="true">↗</span></a>
+    <a href="https://github.com/rudranshshuklaofficial/mindstate/issues" target="_blank" rel="noopener noreferrer">Contribute on GitHub <span aria-hidden="true">↗</span></a>
+   </div>
+   <p class="contribute-repo-note">The repository is being prepared, and more of the project code will be added over time.</p>
+  </header>
+  <div class="contribute-layout">
+   <aside class="contribute-sidebar">
+    <details class="contribute-contents" open>
+     <summary>Explore the guide <span aria-hidden="true">⌄</span></summary>
+     <nav aria-label="Guidelines contents"><ul class="contribute-toc-list">{{ guidelines_toc }}</ul></nav>
+    </details>
+   </aside>
+  <section class="contribute-doc contribute-full" id="full-guidelines" aria-label="Full community and contribution guidelines">
+   {{ full_guidelines }}
+  </section>
+  </div>
+  <p class="contribute-back"><a href="#top">Back to top ↑</a></p>
+ </main>
+ {% include 'community-footer.html' %}
+{% include 'help-bar.html' %}
+</body>
+</html>

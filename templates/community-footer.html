@@ -1,0 +1,51 @@
+{% load static %}
+<div class="mindstate-community-footer">
+     <section class="community-section" aria-labelledby="community-heading">
+      <h2 class="community-label" id="community-heading">Our Community Members</h2>
+      <div class="members-marquee" aria-label="Community members">
+       <div class="members-track">
+        <div class="members-group">{% include 'community-members.html' %}</div>
+        <div class="members-group" aria-hidden="true">{% include 'community-members.html' %}</div>
+       </div>
+      </div>
+      <div class="community-actions">
+       <a class="community-view-all" href="{% url 'community-directory' %}" data-community-action="view-members">View All Members</a>
+       <a href="{% url 'signup' %}" class="text-link" data-community-action="join-community">How to Join Community Members?</a>
+      </div>
+     </section>
+     <footer class="mindstate-footer">
+      <div class="footer-brand">
+       <div class="footer-logo"><img src="{% static 'ChatgptImageSep19202611_28_00Pm2.png' %}" alt="MindState"></div>
+       <h2>MINDSTATE</h2>
+       <p>A space for honest conversations about mental health, culture, and being human.</p>
+      </div>
+      <div class="footer-column"><h3>Categories</h3>
+       <a href="{% url 'home' %}#home-articles" data-community-action="articles">Articles</a>
+       <a href="{% url 'home' %}#home-art" data-community-action="art-and-design">Art and Design</a>
+       <a href="/support/" data-community-action="contact-us">Contact Us</a>
+       <a href="{% url 'about' %}">About Us</a>
+       <a href="{% url 'contribute' %}">Contribute</a>
+       <a href="{% url 'signup' %}" data-community-action="join-the-community">Join the Community</a>
+      </div>
+      <div class="footer-column"><h3>Social</h3>
+       <a href="https://www.instagram.com/mindstate.space/">Instagram</a>
+       <a href="https://www.instagram.com/mindstate.space/">Facebook</a>
+       <a href="https://www.instagram.com/mindstate.space/">Twitter</a>
+       <a href="https://www.instagram.com/mindstate.space/">YouTube</a>
+      </div>
+      {% if not newsletter_recognized %}<form data-newsletter class="footer-subscribe home-signup" method="POST" action="{% url 'newsletter-subscribe' %}">{% csrf_token %}
+       <h3>Subscribe</h3>
+       <label>
+        <span class="sr-only">Email address</span>
+        <input name="email" type="email" placeholder="Enter your mail" required aria-describedby="newsletter-status"/>
+        <button type="submit" aria-label="Subscribe">→</button>
+       </label>
+       <p class="subscribe-status" id="newsletter-status" role="status"></p>
+      </form>{% else %}<p><a href="{% if user.is_authenticated %}{% url 'newsletter-preferences' %}{% else %}{% url 'newsletter-subscribe' %}{% endif %}">Newsletter preferences</a></p>{% endif %}
+      <p class="copyright">MindState © 2026, All Rights Reserved</p>
+      <div class="footer-legal">
+       <button type="button" data-community-action="privacy-policy">Privacy Policy</button>
+       <button type="button" data-community-action="terms">Terms and conditions</button>
+      </div>
+     </footer>
+</div>

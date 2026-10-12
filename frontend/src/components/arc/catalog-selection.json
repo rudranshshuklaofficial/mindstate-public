@@ -1,0 +1,213 @@
+[
+  {
+    "name": "dialog",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/dialog",
+    "dependencies": [
+      "@radix-ui/react-dialog",
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Radix renders role=\"dialog\" with aria-modal, traps focus, and restores it to the trigger on close.",
+      "title and description are wired to aria-labelledby and aria-describedby.",
+      "The close button carries aria-label=\"Close dialog\"."
+    ],
+    "motion": [
+      "The overlay fades while the panel rises 8px and scales from 0.96 on a smooth spring; closing is shorter and retargets from the current state.",
+      "Title and description changes rise in with a soft blur.",
+      "Reduced motion uses a plain opacity fade, including the CSS keyframe fallback for bare Radix roots."
+    ]
+  },
+  {
+    "name": "select",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/select",
+    "dependencies": [
+      "@radix-ui/react-select",
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Built on Radix Select, so the trigger, listbox, and options get the right roles and focus handling.",
+      "The real value renders in a visually hidden Radix Value; the animated copy is aria-hidden.",
+      "Label is linked with htmlFor, and description through aria-describedby."
+    ],
+    "motion": [
+      "A later option rises in from below and an earlier one drops from above, with a soft blur.",
+      "Reduced motion swaps the value with an instant crossfade."
+    ]
+  },
+  {
+    "name": "tabs",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/tabs",
+    "dependencies": [
+      "@radix-ui/react-tabs",
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Radix provides role=\"tablist\", role=\"tab\", role=\"tabpanel\", aria-selected, and aria-controls.",
+      "The outgoing panel is made inert while it fades so it cannot take focus.",
+      "Overflow scroll buttons are labelled \"Scroll tabs left\" and \"Scroll tabs right\"; give TabsList an aria-label."
+    ],
+    "motion": [
+      "The selection pill glides between triggers on a morph spring, scoped to one Tabs instance.",
+      "Panels slide 8px in the direction of travel while the height springs from the previous panel.",
+      "Reduced motion swaps the pill instantly and crossfades panels in place without height animation."
+    ]
+  },
+  {
+    "name": "accordion",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/accordion",
+    "dependencies": [
+      "@radix-ui/react-accordion",
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Radix wires aria-expanded, aria-controls, and region labelling between each trigger and panel.",
+      "Closed panels stay mounted but switch to visibility hidden once collapsed, so they leave the accessibility tree.",
+      "Triggers sit inside heading elements; the chevron is aria-hidden."
+    ],
+    "motion": [
+      "Panel height springs without overshoot while the answer slides down 6px out of a subtle blur; the chevron rotates on a snappy spring.",
+      "A toggle mid-flight retargets from the current height instead of restarting.",
+      "Reduced motion applies the same end states in one step."
+    ]
+  },
+  {
+    "name": "otp-input",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/blocks/otp-input",
+    "dependencies": [
+      "motion"
+    ],
+    "accessibility": [
+      "Slots sit in a labelled role=group, each with an aria-label like Verification code, digit 1 of 6.",
+      "Helper and error text are linked with aria-describedby; the error uses role=alert and sets aria-invalid.",
+      "The first slot uses autocomplete one-time-code so browsers can offer SMS codes."
+    ],
+    "motion": [
+      "Typed characters rise into the slot and unblur; a paste lands as a short left-to-right wave.",
+      "One focus ring glides between slots, and a new error nudges the row side to side once.",
+      "Reduced motion removes the glide, shake, and blur and uses instant fades."
+    ]
+  },
+  {
+    "name": "file-dropzone",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/file-dropzone",
+    "dependencies": [
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "The target is a native button; the hidden file input is removed from the tab order.",
+      "Uploading rows expose role=\"progressbar\" with aria-valuenow; remove and retry buttons are labelled with the file name.",
+      "Additions, completions, and failures are announced through a polite role=\"status\" region; rejection errors use role=\"alert\".",
+      "Removing a row moves focus to a neighbouring row so keyboard users are not dropped."
+    ],
+    "motion": [
+      "The icon lifts while files hover, the edge animates, rows enter and collapse on a smooth spring, and progress bars ease toward their target.",
+      "Reduced motion replaces height and lift animations with short fades and keeps progress changes instant."
+    ]
+  },
+  {
+    "name": "copy-button",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/copy-button",
+    "dependencies": [
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Native button named by label, including when iconOnly.",
+      "A polite role=\"status\" region announces \"<label>: Copied\" or \"<label>: Could not copy\".",
+      "The label cell reserves the widest of its three states, so the layout never shifts."
+    ],
+    "motion": [
+      "Icons trade places through a blur on a slow, nearly critically damped spring, and the check draws its stroke in.",
+      "Only the changed letters of the label move; the same motion plays in reverse on reset.",
+      "Reduced motion swaps icon and text with an instant fade and skips the stroke draw."
+    ]
+  },
+  {
+    "name": "tooltip",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/tooltip",
+    "dependencies": [
+      "@radix-ui/react-tooltip",
+      "motion"
+    ],
+    "accessibility": [
+      "Radix links the content to the trigger with aria-describedby and renders role=\"tooltip\".",
+      "Content is supplemental: icon-only triggers still need their own aria-label.",
+      "Do not put interactive elements inside; use popover instead."
+    ],
+    "motion": [
+      "Opens after 250ms with a 3px rise from 0.97 scale; within 300ms of another tooltip it opens instantly with a fade only.",
+      "Changing string content rises in with a blur while the bubble springs to the new size.",
+      "Reduced motion removes the transform and keeps a 90ms opacity fade."
+    ]
+  },
+  {
+    "name": "button",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/button",
+    "dependencies": [
+      "motion"
+    ],
+    "accessibility": [
+      "Renders a native button, so role and focus come for free.",
+      "Loading uses aria-busy and aria-disabled instead of disabled, so keyboard focus is not lost mid-action.",
+      "Icon-only buttons need an aria-label.",
+      "Disabled primary buttons fade as a whole. Disabled secondary and danger buttons keep their border and take a muted fill and label, and disabled ghost buttons take a muted label, so an unavailable action still reads as a button."
+    ],
+    "motion": [
+      "Presses scale to about 0.97 on a snappy spring; icon-sized buttons press slightly deeper.",
+      "A new label crossfades with a short blur while the width springs to fit.",
+      "Reduced motion drops the press scale and swaps labels with a plain fade."
+    ]
+  },
+  {
+    "name": "empty-state",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/empty-state",
+    "dependencies": [
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "Renders a section with an h3 title; pass label to name the region.",
+      "The icon is aria-hidden.",
+      "Outgoing copy is hidden from assistive tech while it fades."
+    ],
+    "motion": [
+      "Changing title or description rolls the copy in place while the block height springs to fit.",
+      "A new icon pops in with a short blur.",
+      "Reduced motion swaps copy with a fade and snaps height; the icon's idle animation stops."
+    ]
+  },
+  {
+    "name": "code-block",
+    "tier": "free",
+    "docs": "https://uiarc.dev/components/code-block",
+    "dependencies": [
+      "motion",
+      "lucide-react"
+    ],
+    "accessibility": [
+      "The block is a section labelled like \"hello.ts source code\"; the pre is focusable so keyboard users can scroll it.",
+      "The expand toggle uses aria-expanded and aria-controls pointing at the source.",
+      "Copy feedback comes from copy-button."
+    ],
+    "motion": [
+      "Expanding or collapsing springs the source height; new code fades up in place.",
+      "The toggle label rolls and its chevron rotates.",
+      "Reduced motion snaps height and swaps text without movement."
+    ]
+  }
+]

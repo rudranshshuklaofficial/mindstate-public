@@ -1,0 +1,48 @@
+/* UIArc semantic tokens are local to islands AND portal roots. No global reset. */
+.ms-island {
+ --background:#FEF0D8;--surface:#fff8eb;--surface-raised:#fff8eb;--surface-muted:#e9ddc8;
+ --foreground:#292021;--text-secondary:#615746;--text-muted:#746956;
+ --accent:#28513b;--accent-strong:#28513b;--accent-subtle:#e8eddd;--success:#28513b;--warning:#f3d56d;--danger:#a13632;
+ --border:#c7b9a5;--border-subtle:#e9ddc8;--border-strong:#93846f;
+ --font-body:'Google Sans Flex',sans-serif;--leading-body:1.6;--tracking-body:0;
+ --text-xs:12px;--text-sm:14px;--text-base:16px;--text-lg:22px;
+ --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;
+ --radius-control:12px;--radius-panel:18px;--radius-surface:20px;--radius-pill:999px;
+ --control-height-sm:44px;--control-height-md:48px;--control-height-lg:52px;
+ --duration-instant:150ms;--duration-fast:150ms;--duration-standard:150ms;--duration-considered:150ms;--duration-spring:150ms;
+ --ease-standard:ease-out;--ease-enter:ease-out;--ease-in-out:ease-in-out;--ease-spring:ease-out;
+ --shadow-floating:0 14px 44px #29202124;--shadow-resting:none;--shadow-raised:0 5px 14px #29202120;
+ font-family:var(--font-body);color:var(--foreground);box-sizing:border-box;
+}
+.ms-island [hidden]{display:none!important}
+.ms-native{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;padding:0!important;clip-path:inset(50%);overflow:hidden}
+.ms-island button,.ms-island input{font-family:inherit}
+.ms-island button{cursor:pointer;min-height:44px}
+.ms-island button:disabled{cursor:not-allowed}
+.ms-island :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ms-choice>div>label{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.ms-choice button{width:100%}
+.ms-upload-enhanced.image-picker{display:none!important}
+.ms-island:has([role=group]){max-width:100%}
+.ms-island [role=group] input{min-width:0}
+.ms-preview{z-index:1201!important;width:min(840px,calc(100vw - 32px))!important;max-height:calc(100dvh - 32px)!important}
+.ms-preview.ms-expanded{width:calc(100vw - 32px)!important}
+.ms-preview h2{font-family:'Instrument Serif',serif;font-size:34px;font-weight:400}
+.ms-preview iframe{display:block;width:100%;height:55dvh;margin-top:16px;border:0;border-radius:0;background:var(--surface)}
+.ms-preview.ms-expanded iframe{height:65dvh}
+.ms-review-image{display:block;max-width:100%;max-height:65dvh;margin:16px auto 0;object-fit:contain}
+.ms-arc-overlay{z-index:1200!important;background:#29202188!important;backdrop-filter:none!important}
+.ms-island[data-radix-popper-content-wrapper],.ms-island[role=listbox]{z-index:1300!important}
+.ms-submit{min-height:48px!important;padding:12px 18px!important;background:#28513b!important;color:#fff8eb!important;border:1px solid #28513b!important;border-radius:12px!important}
+.ms-submit.app-outline{background:transparent!important;color:#28513b!important}
+.ms-tooltip-anchor{display:inline-flex}
+.ms-button{border:1px solid var(--border);border-radius:999px;padding:10px 18px;background:transparent;color:var(--foreground)}
+.ms-island pre{white-space:pre;max-width:100%;overflow:auto}
+@media(max-width:500px){.ms-preview h2{font-size:28px}.ms-island{--space-6:20px;--space-12:24px}.ms-island [role=group]{gap:6px}.ms-island [role=group] input{max-width:calc((100vw - 112px)/6)}}
+@media(prefers-reduced-motion:reduce){.ms-island{--duration-instant:0ms;--duration-fast:0ms;--duration-standard:0ms;--duration-spring:0ms}.ms-island *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.ms-island div:has(>[role="group"][aria-label="Six-digit verification code"])>span:first-child{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+
+/* The OTP slot border itself is its single focus indicator. */
+.ms-island [role="group"][aria-label="Six-digit verification code"] input:focus-visible{outline:none!important;box-shadow:none!important;border:2px solid var(--accent)!important}
+.ms-island [role="group"][data-invalid="true"] input:focus-visible{border-color:var(--danger)!important}

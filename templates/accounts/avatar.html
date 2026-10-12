@@ -1,0 +1,1 @@
+<span class="profile-avatar">{% if profile.avatar %}<img src="{% if folio_presented %}{{ folio_avatar_url }}{% else %}{% url 'profile-avatar' profile.public_ref %}{% endif %}" alt="{{ profile.display_name|default:'Member' }}’s profile picture">{% else %}{{ profile.display_name|default:'M'|first|upper }}{% endif %}</span>

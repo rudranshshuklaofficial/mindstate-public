@@ -1,0 +1,14 @@
+MindState · Weekly
+{{ period_start }} – {{ period_end }}
+{% if demo %}DEMO — random published posts. This test does not subscribe you.
+{% endif %}{% if writer %}{{ own_reads }} recorded reads this period (one signed-in reader per post per day).
+{% for post in own_posts %}{{ post.title }} · {{ post.view_count }} lifetime recorded views
+{{ post.newsletter_url }}
+{% endfor %}Writer reports pause after five weeks without publishing.
+{% else %}{% for post in featured_posts %}{{ post.title }}
+{{ post.newsletter_url }}
+{% empty %}No published photographs available this week.{% endfor %}{% endif %}
+Visit MindState: https://mindstate.space/
+{% if edition_url %}Web edition: {{ edition_url }}{% endif %}
+{% if unsubscribe_url %}Unsubscribe: {{ unsubscribe_url }}{% endif %}
+Contact the team: {{ base }}/support/

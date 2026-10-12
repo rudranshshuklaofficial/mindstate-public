@@ -1,0 +1,9 @@
+{% load member_tags %}
+<div class="library-reading" lang="{{ snapshot.language }}"><header class="library-byline"><p>By {% author_links article %}</p><p>{{ article.published_at|date:'j F Y' }} · {{ snapshot.language|upper }} · {{ article.get_section_display }}</p></header>
+{% if snapshot.content_warning %}<aside class="library-warning"><strong>Content warning</strong><p>{{ snapshot.content_warning }}</p></aside>{% endif %}
+<div class="library-source"><h2>{{ snapshot.title }}</h2>{{ snapshot.body|story_format }}</div>
+{% if snapshot.images.0 %}<figure class="submitted-inline-image"><img src="{% url 'submission-media' snapshot.submission_id snapshot.revision 'image_2' %}" alt="Image accompanying {{ snapshot.title }}"></figure>{% endif %}
+{% if snapshot.images.1 %}<figure class="submitted-inline-image"><img src="{% url 'submission-media' snapshot.submission_id snapshot.revision 'image_3' %}" alt="Image accompanying {{ snapshot.title }}"></figure>{% endif %}
+{% if snapshot.images.2 %}<figure class="submitted-inline-image"><img src="{% url 'submission-media' snapshot.submission_id snapshot.revision 'image_4' %}" alt="Image accompanying {{ snapshot.title }}"></figure>{% endif %}
+{% if snapshot.images.3 %}<figure class="submitted-inline-image"><img src="{% url 'submission-media' snapshot.submission_id snapshot.revision 'image_5' %}" alt="Image accompanying {{ snapshot.title }}"></figure>{% endif %}
+</div>

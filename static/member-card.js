@@ -1,0 +1,41 @@
+(()=>{
+const canvas=document.querySelector('[data-member-card]');if(!canvas)return;
+const c=canvas.getContext('2d'),form=document.querySelector('[data-card-options]'),status=document.querySelector('[data-card-status]');
+const ink='#292021',paper='#fff8eb',linen='#e9ddc8',forest='#28513b';let photo=null,logo=null,selectedPhoto=null,photoReady=Promise.resolve(),photoVersion=0;
+const photoInput=form.querySelector('[data-card-photo]');
+const choices=()=>Object.fromEntries([...new FormData(form)].filter(([,value])=>typeof value==='string'));
+try{const saved=JSON.parse(localStorage.getItem('mindstate-card-'+canvas.dataset.storageKey)||'{}');for(const field of form.querySelectorAll('select'))if(!(field.name==='portrait'&&saved[field.name]==='upload')&&[...field.options].some(o=>o.value===saved[field.name]))field.value=saved[field.name];}catch{}
+function box(x,y,w,h,r,color,stroke){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=3;c.stroke();}}
+function circle(x,y,r,color){c.fillStyle=color;c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill();}
+function line(points,color,width=4){c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.stroke();}
+function text(value,x,y,size,color,max=1000,font='"Google Sans Flex",sans-serif'){c.font=size+'px '+font;while(c.measureText(value).width>max&&size>12)c.font=(--size)+'px '+font;c.fillStyle=color;c.fillText(value,x,y);}
+function flower(x,y,r=16){for(let i=0;i<6;i++)circle(x+Math.cos(i*Math.PI/3)*r*.7,y+Math.sin(i*Math.PI/3)*r*.7,r*.48,paper);circle(x,y,r*.4,linen);}
+function avatar(v,accent){const skin={light:'#e9c9a4',medium:'#bd8b61',deep:'#74513e'}[v.skin];box(178,522,220,230,18,linen);c.save();c.beginPath();c.roundRect(178,522,220,230,18);c.clip();const portrait=v.portrait==='upload'?selectedPhoto:v.portrait==='photo'?photo:null;if(portrait){const side=Math.min(portrait.width,portrait.height);c.drawImage(portrait,(portrait.width-side)/2,(portrait.height-side)/2,side,side,178,522,220,230);}else{circle(287,751,97,accent);if(v.clothes==='cardigan'){line([[287,696],[287,770]],linen,6);circle(307,727,4,linen);circle(307,746,4,linen);}box(267,668,40,40,12,skin);if(v.hair==='bob'||v.hair==='long')box(217,553,140,v.hair==='long'?200:145,40,ink);circle(225,625,14,skin);circle(349,625,14,skin);box(231,560,112,128,45,skin);if(v.hair!=='none'){box(228,554,118,40,18,ink);if(v.hair==='curly')for(let i=0;i<6;i++)circle(234+i*20,562+(i%2?0:8),19,ink);}circle(266,622,5,ink);circle(311,622,5,ink);box(280,631,15,10,5,skin);if(v.clothes==='striped')for(let y=715;y<775;y+=18)line([[202,y],[372,y]],linen,7);if(v.expression==='bright'){box(274,644,29,24,12,ink);line([[279,649],[297,649]],paper,4);}else if(v.expression==='smile'){c.beginPath();c.arc(288,644,18,.1,Math.PI-.1);c.strokeStyle=ink;c.lineWidth=4;c.stroke();}else line([[279,654],[297,654]],ink,4);if(v.glasses==='on'){for(const x of [264,312]){c.beginPath();c.arc(x,623,19,0,Math.PI*2);c.strokeStyle=forest;c.lineWidth=4;c.stroke();}line([[284,622],[293,622]],forest,4);}circle(252,645,7,'#bd8b6150');circle(324,645,7,'#bd8b6150');}c.restore();}
+function sticker(x,y,angle,v,accent){c.save();c.translate(x,y);c.rotate(angle);box(-49,-43,98,86,12,paper,ink);box(-42,-36,84,72,7,accent);if(v.sticker==='reader'){box(-24,-20,48,38,3,linen);line([[0,-20],[0,19]],ink,3);text('READ',-28,30,13,paper,60);}else if(v.sticker==='artist'){line([[-20,14],[18,-22]],linen,14);text('MAKE',-29,32,13,paper,60);}else{text('✦',-21,14,48,linen,60);text('DREAM',-30,32,12,paper,65);}c.restore();}
+function draw(){const v=choices(),accent={forest,ink,linen:'#796e60',sage:'#566b4f',sunflower:'#28513b',clay:'#86533e'}[v.paper]||forest;c.clearRect(0,0,1000,1050);box(0,0,1000,1050,30,v.paper==='sunflower'?'#f7e6a5':paper);for(let y=80;y<1040;y+=130)for(let x=60;x<1000;x+=130){c.save();c.globalAlpha=.08;text('✿',x,y,45,accent);c.restore();}
+box(453,-40,94,340,12,accent);if(v.lanyard==='blooms')for(let y=30;y<240;y+=65)flower(500,y,15);if(v.lanyard==='check')for(let y=0;y<250;y+=30)for(let x=0;x<3;x++)if((x+y/30)%2===0)box(457+x*28,y,28,30,0,linen);
+if(v.lanyard==='stripes')for(let y=0;y<250;y+=24)line([[461,y],[539,y]],linen,5);
+box(438,230,124,112,35,ink);box(458,248,84,73,22,paper);box(485,286,30,102,15,linen,ink);
+c.save();c.shadowColor='#29202135';c.shadowBlur=24;c.shadowOffsetY=15;box(94,350,812,524,44,accent,ink);c.restore();
+for(let x=126;x<890;x+=60){line([[x,370],[x+5,365],[x+10,372]],linen,2);line([[x,850],[x+5,844],[x+10,851]],linen,2);}for(const [x,y] of [[137,380],[860,407],[135,811],[858,831]])flower(x,y,17);
+box(134,397,732,433,26,ink);box(149,412,702,403,16,paper);box(149,412,702,84,16,linen);
+if(logo)c.drawImage(logo,172,424,58,58);else flower(201,453,23);text('MINDSTATE',250,467,38,accent,435);text('MEMBER FOLIO',660,457,13,ink,165);
+avatar(v,accent);text(canvas.dataset.name,425,555,35,ink,398);text(canvas.dataset.role,425,597,24,accent,398);line([[425,619],[804,619]],linen,3);text('A SPACE FOR EVERY',425,655,19,ink,390);text('PERSPECTIVE',425,683,19,ink,390);text('Reader · Maker · Human',425,724,21,'#796e60',390);
+for(let i=0;i<36;i++){c.fillStyle=ink;c.fillRect(183+i*5,775,i%3===0?3:1,20);}text('COMMUNITY KEEPSAKE',425,790,16,'#796e60',390);sticker(177,536,-.19,v,accent);sticker(834,753,.16,v,accent);
+text('Come as you are.',320,943,37,accent,500,'Georgia,serif');text('Made for belonging. Shared for fun.',278,987,21,'#796e60',550);
+}
+const load=src=>new Promise(resolve=>{if(!src)return resolve(null);const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>resolve(null);image.src=src;});
+const ready=Promise.all([document.fonts.ready,load(canvas.dataset.avatar),load(canvas.dataset.logo)]).then(([,a,l])=>{photo=a;logo=l;draw();});draw();
+photoInput.addEventListener('change',()=>{
+ const version=++photoVersion,file=photoInput.files[0];
+ if(!file){selectedPhoto=null;if(form.elements.portrait.value==='upload'){form.elements.portrait.value='illustration';form.elements.portrait.dispatchEvent(new Event('change',{bubbles:true}));}draw();status.textContent='Selected image removed. Your profile photo is unchanged.';return;}
+ if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5*1024*1024){status.textContent='Choose a PNG, JPEG or WebP image up to 5 MB.';photoInput.value='';selectedPhoto=null;draw();return;}
+ status.textContent='Preparing your card image…';const url=URL.createObjectURL(file);
+ photoReady=load(url).then(image=>{URL.revokeObjectURL(url);if(version!==photoVersion)return;selectedPhoto=image;if(image){form.elements.portrait.value='upload';form.elements.portrait.dispatchEvent(new Event('change',{bubbles:true}));status.textContent='Image ready. It is private to this card and stays in this page only.';}else{status.textContent='This image could not be opened. Choose another image.';}draw();});
+});
+form.addEventListener('change',event=>{if(event.target===photoInput)return;try{localStorage.setItem('mindstate-card-'+canvas.dataset.storageKey,JSON.stringify(choices()));}catch{}draw();status.textContent='Card updated. Your public profile is unchanged.';});
+async function blob(){await ready;await photoReady;draw();return new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('Could not export image')),'image/png'));}
+async function download(value){value??=await blob();const url=URL.createObjectURL(value),a=document.createElement('a');a.href=url;a.download='my-mindstate-card.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent='Your PNG is ready to share.';}
+document.querySelector('[data-card-download]').addEventListener('click',async()=>{try{await download();}catch{status.textContent='The image could not be saved. Please try again.';}});
+document.querySelector('[data-card-share]').addEventListener('click',async()=>{try{const value=await blob(),file=new File([value],'my-mindstate-card.png',{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'My MindState card'});}catch(e){if(e.name!=='AbortError')await download(value);}}else await download(value);}catch{status.textContent='The image could not be shared. Please try downloading it.';}});
+})();

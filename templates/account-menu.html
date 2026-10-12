@@ -1,0 +1,4 @@
+{% if user.is_authenticated %}
+<details class="account-menu"><summary aria-label="Account menu"><span class="ms-icon" aria-hidden="true">person</span></summary>
+<div class="account-menu-panel"><a href="{% url 'dashboard' %}">Dashboard</a><a href="{% url 'my-profile' %}">My profile</a><a href="{% url 'collaboration-space' %}">Collaborations</a>{% if account_is_team %}<a href="{% url 'team-home' %}">Administration</a>{% endif %}<a href="{% url 'account-security' %}">Account security</a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Log out</button></form></div></details>
+{% else %}<a class="account-login" href="{% url 'login' %}">Log in</a>{% endif %}

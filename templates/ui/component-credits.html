@@ -1,0 +1,11 @@
+<section id="component-credits">
+ <h2>Components and credits</h2>
+ <p>MindState adapts selected free components from <a href="https://uiarc.dev/">Arc UI / UIArc</a> by Elia Kuratli, under the <a href="https://uiarc.dev/license">MIT licence</a>. Our cream, forest, ink and yellow palette, Google Sans Flex and Instrument Serif remain the design system. No global UIArc foundation or reset is loaded.</p>
+ <p>React islands enhance Django forms; the server still validates submissions and controls access. Motion is limited to quiet, short state feedback, with immediate reduced-motion states. Review appearance navigation remains ordinary links.</p>
+ <div class="design-components">
+ {% for item in arc_components %}<article class="design-component"><h3>{{ item.name }}</h3><p>{{ item.usage }}</p><p><strong>Dependencies:</strong> {{ item.dependencies }}</p><p><strong>Access:</strong> {{ item.accessibility }}</p><a href="{{ item.source }}">UIArc source and documentation</a><details><summary>MindState usage</summary><pre><code>{{ item.code }}</code></pre><button class="app-button app-outline" type="button" data-copy-component>Copy code</button></details></article>{% endfor %}
+ </div>
+ <div data-arc-examples></div>
+ <p>Underlying dependencies include React, Motion, Radix UI and Lucide. Applicable upstream notices remain with the source. Previous Rare UI, shadcn component wrappers and Motion Primitives disclosure are replaced after parity checks; the shadcn CLI is only an installation tool. See <code>frontend/README.md</code> for adaptation and upgrade instructions.</p>
+ <p>We intentionally retain the existing gallery, notebook, scrapbook and member-card renderers. Toasts, steppers, radio cards, password fields and loading skeletons are not added merely to replace working controls.</p>
+</section>

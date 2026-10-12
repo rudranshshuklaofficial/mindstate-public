@@ -1,0 +1,3 @@
+{% extends 'app/base.html' %}{% block title %}{{ title }}{% endblock %}{% block content %}
+<p class="app-eyebrow">MindState community</p><h1>{{ title }}</h1><p class="app-lede">{{ description }}</p>
+<form enctype="multipart/form-data" method="post" class="app-form">{% csrf_token %}{% include 'accounts/form-fields.html' %}<button class="app-button" type="submit">{{ button }}</button></form>{% endblock %}

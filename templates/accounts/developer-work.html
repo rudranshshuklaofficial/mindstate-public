@@ -1,0 +1,9 @@
+<section class="workspace-panel developer-work" id="development-work" aria-labelledby="developer-work-title">
+<div class="section-topline"><div><p class="app-eyebrow">Behind the scenes</p><h2 id="developer-work-title">Work done</h2></div><span class="developer-demo-label">Demo portfolio</span></div>
+<p class="app-hint">Example entries to show how development work will look. These are not verified contributions by this member. Contribution tracking will be added later.</p>
+<div class="developer-project-grid">
+{% for category, symbol, title, description, tag in developer_copy.projects %}
+<article class="developer-project"><span class="developer-project-number">0{{ forloop.counter }} / {{ category }}</span><span class="developer-project-symbol" aria-hidden="true">{{ symbol }}</span><h3>{{ title }}</h3><p>Example: {{ description }}</p><span class="developer-project-tag">Demo · {{ tag }}</span></article>
+{% endfor %}
+</div><a class="app-button app-outline" href="{% url 'design-system' %}">Explore the MindState design system <span class="ms-icon" aria-hidden="true">arrow_forward</span></a>
+</section>

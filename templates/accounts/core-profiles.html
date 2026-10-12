@@ -1,0 +1,6 @@
+{% extends 'app/base.html' %}{% block title %}Member profiles{% endblock %}{% block content %}
+<a class="workspace-back" href="{% url 'team-home' %}"><span class="ms-icon" aria-hidden="true">arrow_back</span> Administration</a>
+<p class="app-eyebrow">Core team</p><h1>Member profiles.</h1>
+<p class="app-lede">Review a profile before making changes. Published work stays attached to its credited author until a Core team admin links it to an account.</p>
+{% for member in members %}<section class="app-row"><div><a href="{% url 'profile-view' member.profile.public_ref %}"><strong>{{ member.profile.display_name|default:member.username }}</strong></a><p>Joined {{ member.date_joined|date:'j F Y' }}</p></div><a href="{% url 'profile-admin-edit' member.profile.public_ref %}">Edit profile <span class="ms-icon" aria-hidden="true">arrow_forward</span></a></section>{% empty %}<p>No members yet.</p>{% endfor %}
+{% endblock %}

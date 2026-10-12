@@ -1,0 +1,33 @@
+/* Shared MindState action spacing, scoped to existing page controls. */
+.footer-column a,.community-footer a{ text-decoration:none!important; font-family:"Google Sans Flex",system-ui,sans-serif!important; font-size:16px!important; font-weight:400!important; line-height:1.5!important; text-transform:none!important }
+.footer-column a:hover,.community-footer a:hover{color:#28513b}
+.footer-column a:focus-visible,.community-footer a:focus-visible{outline:2px solid #28513b;outline-offset:4px;border-radius:3px}
+.action-group,.collaboration-card-actions,.review-start-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.recovery-panel>form+form,.recovery-panel>form+a,.recovery-panel>.app-button{margin-top:12px}
+.app-form>button,.app-form>.ms-island{margin-top:12px}
+.folio-tools .ms-select-island{flex:0 1 230px;min-width:min(230px,100%)}
+.member-card-options .ms-select-island{display:block;width:100%;margin:8px 0 18px}
+.ms-select-island{min-width:0;max-width:100%}
+.ms-choice [role=combobox]{min-height:46px;padding:10px 14px}
+.ms-island [role=listbox] [role=option]{padding-block:10px;line-height:1.4}
+.design-preview{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:24px!important}
+.design-preview>.profile-stat-strip{width:100%;margin:0}
+.design-preview .app-button,.design-preview>.ms-icon{margin:0}
+.review-start-actions{margin:24px 0}
+.review-decision-panel>.composer-field,.review-decision-panel>p,.review-decision-panel>fieldset{margin-block:20px}
+.review-decision-panel label{display:block;margin-bottom:8px}
+.review-decision-panel .review-options{display:grid;gap:14px}
+.consent-preview-frame{width:100%;height:70vh;border:0;background:#fff8eb;display:block}
+.review-visual-panel{min-width:0}
+.document-expand{display:block;margin:14px 20px}
+.app-danger{background:#a52b2b!important;border-color:#a52b2b!important;color:#fff8eb!important}
+.deletion-panel{margin-top:32px;border-color:#a52b2b}
+.library-load-more{display:flex;justify-content:center;margin:24px 0}
+.security-grid>.workspace-panel{margin:0;min-width:0}
+@media(max-width:600px){.action-group,.collaboration-card-actions{align-items:stretch;flex-direction:column}.action-group>*{width:100%}.folio-tools .ms-select-island{flex-basis:100%}.security-grid{grid-template-columns:1fr!important}.consent-preview-frame{height:60vh}}
+@media(prefers-reduced-motion:reduce){.plan-a-dialog,.plan-a-dialog *{animation:none!important;transition:none!important}}
+
+.collaboration-card-actions .collab-open-link{margin:0;display:inline-flex;align-items:center;gap:8px;min-height:44px}.collaboration-card-actions{margin-top:16px}
+.plan-a-dialog{width:min(520px,calc(100vw - 32px));box-sizing:border-box;padding:28px;border:1px solid #c7b9a5;border-radius:20px;color:#292021;background:#fff8eb}.plan-a-dialog::backdrop{background:#29202180}
+
+.evidence-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-block:20px}.evidence-grid img{width:100%;height:180px;object-fit:contain;border:1px solid #c7b9a5;border-radius:12px}.app-form p{margin-block:18px}.app-form textarea{min-height:120px}.workspace-tabs[aria-label="Community tools"] a{min-height:44px;display:inline-flex;align-items:center}
