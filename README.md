@@ -1,19 +1,19 @@
 # MindState
 
-MindState is a Django platform for articles, visual art, creative collaboration, and scrapbook-style member profiles. The interface uses cream paper, forest green, Google Sans Flex, and Instrument Serif, with small React enhancements over server-rendered pages.
+MindState is the website behind our youth-led magazine. It's where people read articles, browse art, work on pieces together, and put together scrapbook-style member profiles. It's built with Django, and a few small React bits sit on top of the server-rendered pages. The look is cream paper and forest green, set in Google Sans Flex and Instrument Serif.
 
-## Features
+## What's in it
 
-- Article library, scrolling art gallery, reader controls, tags, search, and incremental homepage loading.
-- Reviewed submissions and profile revisions, private owner previews, and visual review markers.
-- Collaboration requests with permission-controlled essay/art previews and shared workspaces.
-- Email verification, password recovery, backup codes, two-factor authentication, and consent-gated accounts for members under 16.
-- Administration for reviews, member restrictions, appeals, support conversations, and weekly newsletters.
-- Customizable member cards, profile themes, image uploads, and accessible enhanced controls.
+- An article library and a scrolling art gallery, with reader controls, tags, search, and a homepage that loads more as you scroll.
+- Submissions and profile edits go through review first. Owners can preview their work privately, and reviewers can mark things up visually.
+- Collaboration requests, where you choose who can preview your essay or art, plus shared workspaces.
+- Email verification, password resets, backup codes and two-factor login. Members under 16 need consent before their account is active.
+- Admin tools for reviews, restricting members, appeals, support chats and the weekly newsletter.
+- Member cards and profile themes you can customise, image uploads, and controls that work with a keyboard and screen readers.
 
-## Local setup
+## Running it locally
 
-Requires Python 3.12 or newer. Node.js is needed only to rebuild the enhanced controls; the compiled assets are included.
+You'll need Python 3.12 or newer. Node.js is only needed if you want to rebuild the React controls, since the built files are already in the repo.
 
 ```powershell
 git clone https://github.com/rudranshshuklaofficial/mindstate-public.git
@@ -27,7 +27,9 @@ python manage.py createsuperuser
 python manage.py runserver 3000
 ```
 
-Open http://localhost:3000/. Local browsing requires sign-in. Account permissions, email verification, consent, and reviewer authentication requirements still apply. The fixtures contain the bundled editorial library, not member accounts or private uploads. Load them into a fresh development database; avoid reloading fixtures over edited content.
+Then open http://localhost:3000/. You'll have to sign in even locally, and the usual rules still apply: account permissions, email verification, consent and reviewer login.
+
+The fixtures only contain our editorial library (articles and art), with no member accounts or private uploads. Load them into a fresh database, and don't reload them on top of content you've already edited, or you'll overwrite your changes.
 
 ## Frontend
 
@@ -37,22 +39,22 @@ npm run check --prefix frontend
 npm run build --prefix frontend
 ```
 
-The build writes to `static/enhanced/`. Django serves the result; a separate React development server is not required. Components preserve native Django fields and validation, keyboard access, and reduced-motion behavior. See [frontend/README.md](frontend/README.md) and the signed-in `/contribute/design-system/` page for usage and credits.
+The build goes into `static/enhanced/`, and Django serves it from there, so you don't need a separate React dev server. The components keep Django's own form fields and validation, work with a keyboard, and respect reduced-motion settings. There's more in [frontend/README.md](frontend/README.md), and once you're signed in, the `/contribute/design-system/` page shows how everything is used and who it's credited to.
 
 ## Email and private files
 
-Email is disabled by default unless credentials are configured. For local Windows development, run:
+Email stays off until you set up credentials. On Windows, run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\configure-local-smtp.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-local.ps1 -Port 3000
 ```
 
-The SMTP setup prompts invisibly and stores Windows DPAPI-encrypted credentials under ignored `work/secrets/`. Never place passwords in source code or commit the credential file. The default sender is `MindState <team@mindstate.space>` using Google Workspace SMTP on port 587 with STARTTLS. The startup script loads saved local credentials into the process environment.
+The first script asks for your SMTP password without showing it on screen. It saves it encrypted with Windows DPAPI in `work/secrets/`, which git ignores. The second script loads those saved credentials when the server starts. Please never put passwords in the code or commit that file. By default, mail goes out as `MindState <team@mindstate.space>` through Google Workspace SMTP on port 587 with STARTTLS.
 
-Databases, member uploads, consent evidence, reset codes, local credentials, backups, and development handoffs are excluded from this public source repository. A fresh checkout creates its own database and local secret. Weekly mail schedules require explicit configuration; cloning the repository does not send newsletters.
+Some things are deliberately left out of this public repo: databases, member uploads, consent records, reset codes, local credentials, backups and internal handoff notes. A fresh clone makes its own database and secret key. The weekly newsletter only runs if you set it up yourself, so cloning the repo won't email anyone.
 
-## Verification
+## Testing
 
 ```powershell
 python manage.py check
@@ -61,14 +63,14 @@ npm run check --prefix frontend
 npm run build --prefix frontend
 ```
 
-Tests use isolated databases and in-memory mailboxes. Do not run real delivery tests against members without explicit authorization. Browser-only and device-specific checks, including iPhone Gmail rendering, need separate verification.
+Tests run on their own throwaway databases and fake inboxes. Don't send real test emails to members unless you have explicit permission. Some things can only be checked by hand on a real browser or device, like how emails look in Gmail on an iPhone.
 
-## Deployment
+## Deploying
 
-This repository publishes source code; pushing it does not deploy MindState. Production requires a new `DJANGO_SECRET_KEY`, appropriate host/CSRF settings, persistent private storage, production email configuration, and a supported production database setup. Review `web/settings.py` and the deployment checks before hosting. No local database or encrypted SMTP credential is provided.
+Pushing to this repo doesn't deploy anything, because it's just the source code. To run MindState in production, you'll need a new `DJANGO_SECRET_KEY`, the right host and CSRF settings, persistent private storage, a production email setup and a supported production database. Look through `web/settings.py` and Django's deployment checks before you host it. There's no database or saved email login included.
 
-## Components and credits
+## Credits
 
-Selected components are adapted from [Arc UI / UIArc](https://uiarc.dev/) by Elia Kuratli. Its MIT notice is retained in `frontend/src/components/arc/LICENSE` and `static/enhanced/UIARC-LICENSE.txt`. React, Radix UI, Motion, and Lucide notices are retained in `static/enhanced/THIRD-PARTY-NOTICES.txt`; remaining upstream source notices are kept alongside their code.
+Some components are adapted from [Arc UI / UIArc](https://uiarc.dev/) by Elia Kuratli. Its MIT license is kept in `frontend/src/components/arc/LICENSE` and `static/enhanced/UIARC-LICENSE.txt`. The notices for React, Radix UI, Motion and Lucide are in `static/enhanced/THIRD-PARTY-NOTICES.txt`, and any other upstream notices sit next to the code they cover.
 
-Article and artwork source credits are preserved in the content packs and reading templates. Public source availability does not grant blanket reuse rights to MindState branding, editorial writing, supplied artwork, or member contributions. Follow each work's stated permissions and the applicable dependency licenses.
+Credits for the articles and artwork are kept in the content packs and the reading templates. Just because the code is public doesn't mean you can reuse the MindState name and branding, our writing, the artwork or anything members have contributed. Please follow each work's own permissions and the licenses of the dependencies.
